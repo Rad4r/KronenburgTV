@@ -1,0 +1,11 @@
+CREDITS
+Artist:
+-Nerys Patist (environment art, concept art, 2d art, 3d art, unity work, sound, (probebly more))
+
+
+Developers: 
+-
+
+
+(if you have added something to this project please add your name and 
+what you did in this note)
