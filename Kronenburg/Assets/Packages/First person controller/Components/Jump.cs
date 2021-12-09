@@ -2,19 +2,11 @@
 
 public class Jump : MonoBehaviour
 {
-    [SerializeField]
-    GroundCheck groundCheck;
     Rigidbody rigidbody;
     public float jumpStrength = 2;
-    public event System.Action Jumped;
 
-
-    void Reset()
-    {
-        groundCheck = GetComponentInChildren<GroundCheck>();
-        if (!groundCheck)
-            groundCheck = GroundCheck.Create(transform);
-    }
+    public float maxGroundDistance = .3f;
+    private bool isGrounded;
 
     void Awake()
     {
@@ -23,10 +15,13 @@ public class Jump : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetButtonDown("Jump") && groundCheck.isGrounded)
-        {
+        if (Input.GetButtonDown("Jump") && CheckIsGrounded())
             rigidbody.AddForce(Vector3.up * 100 * jumpStrength);
-            Jumped?.Invoke();
-        }
+    }
+
+    bool CheckIsGrounded()
+    {
+        Vector3 groundCheckPosition = transform.position + Vector3.up * .01f;
+        return Physics.Raycast(groundCheckPosition, Vector3.down, maxGroundDistance);
     }
 }
